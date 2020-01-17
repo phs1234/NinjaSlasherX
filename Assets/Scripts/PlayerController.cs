@@ -154,6 +154,7 @@ public class PlayerController : BaseCharactarController
 
     public void ActionAttack() {
         AnimatorStateInfo stateInfo = animator.GetCurrentAnimatorStateInfo(0);
+     
 
         if (stateInfo.nameHash == ANISTS_Idle ||
             stateInfo.nameHash == ANISTS_Walk ||

@@ -32,7 +32,7 @@ public class BaseCharactarController : MonoBehaviour
     protected GameObject groundCheck_OnEnemyObject;
 
     protected virtual void Awake() {
-        animator = transform.Find("Sprite").GetComponent<Animator>();
+        animator = GetComponent<Animator>();
 
         groundCheck_L = transform.Find("GroundCheck_L");
         groundCheck_C = transform.Find("GroundCheck_C");
