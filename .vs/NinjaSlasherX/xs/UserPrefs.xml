@@ -1,27 +1,16 @@
 ﻿<Properties StartupConfiguration="{26BE5DD3-B51E-BD36-44EE-D300E12D2AED}|">
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/BaseCharactarController.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/StageA_TimeEffect.cs">
     <Files>
-      <File FileName="Assets/Scripts/PlayerController.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/PlayerMain.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/BaseCharactarController.cs" Line="35" Column="20" />
+      <File FileName="Assets/Scripts/PlayerController.cs" Line="102" Column="1" />
+      <File FileName="Assets/Scripts/PlayerBodyCollider.cs" />
+      <File FileName="Assets/Scripts/CameraFollow.cs" />
+      <File FileName="Assets/Scripts/zFoxTween.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/StageA_TimeEffect.cs" Line="34" Column="6" />
     </Files>
-    <Pads>
-      <Pad Id="ProjectPad">
-        <State name="__root__">
-          <Node name="NinjaSlasherX" expanded="True">
-            <Node name="Assets" expanded="True">
-              <Node name="Scripts" expanded="True">
-                <Node name="BaseCharactarController.cs" selected="True" />
-              </Node>
-            </Node>
-          </Node>
-        </State>
-      </Pad>
-    </Pads>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="5ab40ee4-9972-40f4-8a63-1853f306e23b" />
+  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="d7f3329c-54e3-48bd-a7e6-9d78666bcd75" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>

@@ -9,7 +9,6 @@ TagManager:
   - PlayerArmBullet
   - Enemy
   - EnemyBody
-  - EnemyBodyBullet
   - Road
   - Item
   - Object
@@ -22,6 +21,8 @@ TagManager:
   - DestroySwitch
   - Shadow
   - SubCamera
+  - EnemyArm
+  - EnemyArmBullet
   layers:
   - Default
   - TransparentFX
@@ -36,7 +37,7 @@ TagManager:
   - Object
   - Char
   - GroundCheck
-  - item
+  - Item
   - CameraTrigger
   - PhysicsETC
   - 

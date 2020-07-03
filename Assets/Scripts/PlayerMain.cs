@@ -22,10 +22,15 @@ public class PlayerMain : MonoBehaviour
 
         if (Input.GetButtonDown("Jump")) {
             playerCtrl.ActionJump();
+            return;
         }
 
         if (Input.GetButtonDown("Fire1")) {
             playerCtrl.ActionAttack();
+        }
+
+        if (Input.GetButtonDown("Fire2")) {
+            playerCtrl.ActionAttackJump();
         }
     }
 }
