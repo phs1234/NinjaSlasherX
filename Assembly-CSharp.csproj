@@ -87,6 +87,8 @@
     <Compile Include="Assets\Scripts\StageObject_BlockA.cs" />
     <Compile Include="Assets\Scripts\StageObject_DogPile.cs" />
     <Compile Include="Assets\Scripts\StageTrigger_Camera.cs" />
+    <Compile Include="Assets\Scripts\StageTrigger_CheckPoint.cs" />
+    <Compile Include="Assets\Scripts\StageTrigger_Link.cs" />
     <Compile Include="Assets\Scripts\Unity2DSortingLayer.cs" />
     <Compile Include="Assets\Scripts\zFoxTween.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark01.cs" />

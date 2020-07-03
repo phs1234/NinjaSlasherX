@@ -17,11 +17,11 @@ public class PlayerController : BaseCharactarController
     public static string checkPointLabelName = "";
     public static float checkPointHp = 0;
 
+    public static bool initParam = true;
+
     public static bool itemKeyA = false;
     public static bool itemKeyB = false;
     public static bool itemKeyC = false;
-
-    public static bool initParam = true;
 
     [System.NonSerialized] public float groundY = 0.0f;
     [System.NonSerialized] public bool superMode = false;
@@ -98,7 +98,23 @@ public class PlayerController : BaseCharactarController
             SetHp(initHpMax, initHpMax);
             initParam = false;
         }
+        if (SetHp(PlayerController.nowHp, PlayerController.nowHpMax)) {
+            SetHp(1, initHpMax);
+        }
 
+        if (checkPointEnabled) {
+            StageTrigger_CheckPoint[] triggerList = GameObject.Find("Stage").GetComponentsInChildren<StageTrigger_CheckPoint>();
+
+            foreach (StageTrigger_CheckPoint trigger in triggerList) {
+                if (trigger.labelName == checkPointLabelName) {
+                    transform.position = trigger.transform.position;
+                    groundY = transform.position.y;
+                    Camera.main.GetComponent<CameraFollow>().SetCamera(trigger.cameraParam);
+                    break;
+                }
+            }
+
+        }
 
         // ?
         //if (SetHp(PlayerController.nowHp, PlayerController.nowHpMax)) {
@@ -108,6 +124,19 @@ public class PlayerController : BaseCharactarController
         //if (checkPointEnabled) {
             
         //}
+    }
+
+    public void ActionEtc() {
+        Collider2D[] otherAll = Physics2D.OverlapPointAll(groundCheck_C.position);
+
+        foreach (Collider2D other in otherAll) {
+            if (other.tag == "EventTrigger") {
+                StageTrigger_Link link = other.GetComponent<StageTrigger_Link>();
+                if (link != null) {
+                    link.Jump();
+                }
+            }
+        }
     }
 
     protected override void Update() {

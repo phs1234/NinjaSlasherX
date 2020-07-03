@@ -1,16 +1,18 @@
 ﻿<Properties StartupConfiguration="{26BE5DD3-B51E-BD36-44EE-D300E12D2AED}|">
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/StageA_TimeEffect.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/StageTrigger_Link.cs">
     <Files>
       <File FileName="Assets/Scripts/PlayerController.cs" Line="102" Column="1" />
       <File FileName="Assets/Scripts/PlayerBodyCollider.cs" />
       <File FileName="Assets/Scripts/CameraFollow.cs" />
-      <File FileName="Assets/Scripts/zFoxTween.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/StageA_TimeEffect.cs" Line="34" Column="6" />
+      <File FileName="Assets/Scripts/zFoxTween.cs" />
+      <File FileName="Assets/Scripts/StageA_TimeEffect.cs" />
+      <File FileName="Assets/Scripts/StageTrigger_Link.cs" Line="42" Column="1" />
+      <File FileName="Assets/Scripts/StageTrigger_CheckPoint.cs" Line="12" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="d7f3329c-54e3-48bd-a7e6-9d78666bcd75" />
+  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="35dee0af-490c-4bce-92a0-b89fb57e4bcf" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
