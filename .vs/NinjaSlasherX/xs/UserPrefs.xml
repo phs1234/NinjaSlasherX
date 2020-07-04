@@ -1,13 +1,15 @@
 ﻿<Properties StartupConfiguration="{26BE5DD3-B51E-BD36-44EE-D300E12D2AED}|">
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/StageTrigger_Link.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/EnemyMain_B.cs">
     <Files>
-      <File FileName="Assets/Scripts/PlayerController.cs" Line="102" Column="1" />
-      <File FileName="Assets/Scripts/PlayerBodyCollider.cs" />
+      <File FileName="Assets/Scripts/PlayerController.cs" Line="413" Column="56" />
+      <File FileName="Assets/Scripts/PlayerBodyCollider.cs" Line="43" Column="75" />
       <File FileName="Assets/Scripts/CameraFollow.cs" />
       <File FileName="Assets/Scripts/zFoxTween.cs" />
       <File FileName="Assets/Scripts/StageA_TimeEffect.cs" />
-      <File FileName="Assets/Scripts/StageTrigger_Link.cs" Line="42" Column="1" />
-      <File FileName="Assets/Scripts/StageTrigger_CheckPoint.cs" Line="12" Column="1" />
+      <File FileName="Assets/Scripts/StageTrigger_Link.cs" Line="25" Column="26" />
+      <File FileName="Assets/Scripts/StageTrigger_CheckPoint.cs" Line="16" Column="73" />
+      <File FileName="Assets/Scripts/EnemyController.cs" Line="79" Column="1" />
+      <File FileName="Assets/Scripts/EnemyMain_B.cs" Line="20" Column="45" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />

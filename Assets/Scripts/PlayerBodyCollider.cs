@@ -39,6 +39,8 @@ public class PlayerBodyCollider : MonoBehaviour
             }
         } else if (other.tag == "CameraTrigger") {
             Camera.main.GetComponent<CameraFollow>().SetCamera(other.GetComponent<StageTrigger_Camera>().param);
+        } else if (other.tag == "EventTrigger") {
+            other.SendMessage("OnTriggerEnter2D_PlayerEvent", gameObject);
         } else if (other.tag == "Item") {
             if (other.name == "Item_Koban")
             {
@@ -77,7 +79,6 @@ public class PlayerBodyCollider : MonoBehaviour
              col.gameObject.tag == "MoveObject" ||
              col.gameObject.tag == "Enemy") {
             playerCtrl.groundY = transform.parent.transform.position.y;
-            Debug.Log("col: " + playerCtrl.groundY);
         }
     }
 }

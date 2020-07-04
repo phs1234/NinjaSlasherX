@@ -17,7 +17,7 @@ public class EnemyMain_B : EnemyMain
         switch (aiState)
         {
             case ENEMYAISTS.ACTIONSELECT:
-                Debug.Log("ACTIONSELECT");
+                //Debug.Log("ACTIONSELECT");
                 int n = SelectRandomAIState();
 
                 if (n < aiIfRUNTOPLAYER)

@@ -25,6 +25,8 @@ public class StageTrigger_Link : MonoBehaviour
         if (!jumpInput) {
             Jump();
         }
+
+        Debug.Log("jumpInput: " + jumpInput);
     }
 
     public void Jump() {
@@ -40,7 +42,7 @@ public class StageTrigger_Link : MonoBehaviour
         playerCtrl.ActionMove(0.0f);
         playerCtrl.activeSts = false;
 
-        Invoke("jumpWork", jumpDelayTime);
+        Invoke("JumpWork", jumpDelayTime);
     }
 
     void JumpWork() {

@@ -386,13 +386,28 @@ public class PlayerController : BaseCharactarController
         SetHp(0, hpMax);
         Invoke("GameOver", 3.0f);
 
+        if (gameOver)
+        {
+            SetHp(0, hpMax);
+            Invoke("GameOver", 3.0f);
+        }
+        else {
+            SetHp(hp / 2, hpMax);
+            Invoke("GameOver", 3.0f);
+        }
+
         GameObject.Find("HUD_Dead").GetComponent<MeshRenderer>().enabled = true;
         GameObject.Find("HUD_DeadShadow").GetComponent<MeshRenderer>().enabled = true;
     }
 
     public void GameOver() {
         PlayerController.score = 0;
-        
+        PlayerController.nowHp = PlayerController.checkPointHp;
+        Application.LoadLevel(Application.loadedLevelName);
+    }
+
+    void GameReset() {
+        Application.LoadLevel(Application.loadedLevelName);
     }
 
     public override bool SetHp(float _hp, float _hpMax)
