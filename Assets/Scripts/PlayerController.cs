@@ -115,15 +115,6 @@ public class PlayerController : BaseCharactarController
             }
 
         }
-
-        // ?
-        //if (SetHp(PlayerController.nowHp, PlayerController.nowHpMax)) {
-        //    SetHp(1, initHpMax);
-        //}
-
-        //if (checkPointEnabled) {
-            
-        //}
     }
 
     public void ActionEtc() {
@@ -377,7 +368,7 @@ public class PlayerController : BaseCharactarController
     public override void Dead(bool gameOver) {
         AnimatorStateInfo stateInfo = animator.GetCurrentAnimatorStateInfo(0);
 
-        if (!activeSts || stateInfo.nameHash == ANISTS_DEAD) {
+        if (stateInfo.nameHash == ANISTS_DEAD) {
             return;
         }
 
@@ -393,7 +384,7 @@ public class PlayerController : BaseCharactarController
         }
         else {
             SetHp(hp / 2, hpMax);
-            Invoke("GameOver", 3.0f);
+            Invoke("GameReset", 3.0f);
         }
 
         GameObject.Find("HUD_Dead").GetComponent<MeshRenderer>().enabled = true;

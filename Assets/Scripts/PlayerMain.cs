@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerMain : MonoBehaviour
 {
     PlayerController playerCtrl;
+    bool actionEtcRun = true;
 
     void Awake()
     {
@@ -31,6 +32,18 @@ public class PlayerMain : MonoBehaviour
 
         if (Input.GetButtonDown("Fire2")) {
             playerCtrl.ActionAttackJump();
+        }
+
+        if (Input.GetAxisRaw("Vetical") > 0.7f)
+        {
+            if (actionEtcRun)
+            {
+                playerCtrl.ActionEtc();
+                actionEtcRun = false;
+            }
+        }
+        else {
+            actionEtcRun = true;
         }
     }
 }
