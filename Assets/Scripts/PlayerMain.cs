@@ -34,7 +34,7 @@ public class PlayerMain : MonoBehaviour
             playerCtrl.ActionAttackJump();
         }
 
-        if (Input.GetAxisRaw("Vetical") > 0.7f)
+        if (Input.GetAxisRaw("Vertical") > 0.7f)
         {
             if (actionEtcRun)
             {
