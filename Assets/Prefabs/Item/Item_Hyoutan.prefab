@@ -111,13 +111,41 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tweenItemList:
   - enabled: 1
+    valueType: 2
+    opmMode: 7
+    outMode: 1
+    outWeight: 1
+    va: -0.3
+    vb: 0.3
+    speed: 1
+    vt: 0
+    _smoothDumpVelocity: 0
+    _smoothDumpMaxSpeed: 0
+    filterMode: 0
+    filterMin: 0
+    filterMax: 0
+  - enabled: 1
     valueType: 11
+    opmMode: 7
+    outMode: 1
+    outWeight: 1
+    va: 30
+    vb: 60
+    speed: 1
+    vt: 0
+    _smoothDumpVelocity: 0
+    _smoothDumpMaxSpeed: 0
+    filterMode: 0
+    filterMin: 0
+    filterMax: 0
+  - enabled: 1
+    valueType: 12
     opmMode: 7
     outMode: 1
     outWeight: 1
     va: 0
     vb: 0.5
-    speed: 10
+    speed: 1
     vt: 0
     _smoothDumpVelocity: 0
     _smoothDumpMaxSpeed: 0

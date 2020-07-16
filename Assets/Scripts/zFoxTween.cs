@@ -7,6 +7,7 @@ public enum zFoxTWEEN_VALUE {
     POSITION_X,
     POSITION_Y,
     POSITION_Z,
+    LOCALPOSITION,
     LOCALPOSITION_X,
     LOCALPOSITION_Y,
     LOCALPOSITION_Z,
@@ -64,6 +65,7 @@ public class zFoxTween : MonoBehaviour
         public zFOXTWEEN_OPM opmMode = zFOXTWEEN_OPM.NON;
         public zFOXTWEEN_OUT outMode = zFOXTWEEN_OUT.ADD;
         public float outWeight = 1.0f;
+
         public float va = 0.0f;
         public float vb = 1.0f;
         public float speed = 1.0f;
@@ -99,15 +101,16 @@ public class zFoxTween : MonoBehaviour
         }
     }
 
-    private void OnBecameInvisible()
+    private void OnBecameVisible()
     {
         cameraVisible = true;
     }
 
-    private void OnBecameVisible()
+    private void OnBecameInvisible()
     {
         cameraVisible = false;
     }
+
 
     // Update is called once per frame
     void Update()
@@ -168,18 +171,18 @@ public class zFoxTween : MonoBehaviour
                     break;
 
                 case zFoxTWEEN_VALUE.LOCALSCALE_X:
-                    localScale_x += TweenFloat(tw, localScale_x, orgLocalScale.x); break;
+                    localScale_x = TweenFloat(tw, localScale_x, orgLocalScale.x); break;
 
                 case zFoxTWEEN_VALUE.LOCALSCALE_Y:
-                    localScale_y += TweenFloat(tw, localScale_y, orgLocalScale.y); break;
+                    localScale_y = TweenFloat(tw, localScale_y, orgLocalScale.y); break;
 
                 case zFoxTWEEN_VALUE.LOCALSCALE_Z:
-                    localScale_z += TweenFloat(tw, localScale_z, orgLocalScale.z); break;
+                    localScale_z = TweenFloat(tw, localScale_z, orgLocalScale.z); break;
 
                 case zFoxTWEEN_VALUE.LOCALSCALE:
-                    localScale_x += TweenFloat(tw, localScale_x, orgLocalScale.x);
-                    localScale_y += TweenFloat(tw, localScale_y, orgLocalScale.y);
-                    localScale_z += TweenFloat(tw, localScale_z, orgLocalScale.z);
+                    localScale_x = TweenFloat(tw, localScale_x, orgLocalScale.x);
+                    localScale_y = TweenFloat(tw, localScale_y, orgLocalScale.y);
+                    localScale_z = TweenFloat(tw, localScale_z, orgLocalScale.z);
                     break;
 
                 case zFoxTWEEN_VALUE.COLOR_R:
@@ -207,6 +210,8 @@ public class zFoxTween : MonoBehaviour
                     color_a = TweenFloat(tw, color_a, orgColor.a);
                     break;
             }
+
+      
 
             transform.position = new Vector3(position_x, position_y, position_z);
             transform.localRotation = Quaternion.Euler(localRotation_x, localRotation_y, localRotation_z);
@@ -249,7 +254,7 @@ public class zFoxTween : MonoBehaviour
             case zFOXTWEEN_OPM.RANDOM:
                 n = Random.Range(tw.va, tw.vb); break;
         }
-
+       
         switch (tw.outMode) {
             case zFOXTWEEN_OUT.OVERRIDE:
                 nowN = orgN; break;
@@ -261,15 +266,14 @@ public class zFoxTween : MonoBehaviour
                 n = -n * tw.outWeight; break;
         }
 
-        switch (tw.filterMode) {
+        switch (tw.filterMode)
+        {
             case zFOXTWEEN_FILTER.MIN:
                 n = Mathf.Min(n, tw.filterMin); break;
             case zFOXTWEEN_FILTER.MAX:
                 n = Mathf.Max(n, tw.filterMax); break;
             case zFOXTWEEN_FILTER.MINMAX:
                 n = Mathf.Clamp(n, tw.filterMin, tw.filterMax); break;
-
-
         }
 
         return nowN + n;
