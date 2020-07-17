@@ -83,7 +83,6 @@ public class PlayerController : BaseCharactarController
         hudScore = GameObject.Find("HUD_Score").GetComponent<TextMesh>();
         hudCombo = GameObject.Find("HUD_Combo").GetComponent<TextMesh>();
 
-
         // 초기 값 세팅하기
         speed = initSpeed;
         groundY = groundCheck_C.transform.position.y + 2.0f;
@@ -115,17 +114,28 @@ public class PlayerController : BaseCharactarController
             }
 
         }
+
+        Transform hud = GameObject.FindGameObjectWithTag("SubCamera").transform;
+        hud.Find("Stage_Item_Key_A").GetComponent<SpriteRenderer>().enabled = itemKeyA;
+        hud.Find("Stage_Item_Key_B").GetComponent<SpriteRenderer>().enabled = itemKeyB;
+        hud.Find("Stage_Item_Key_C").GetComponent<SpriteRenderer>().enabled = itemKeyC;
     }
 
     public void ActionEtc() {
         Collider2D[] otherAll = Physics2D.OverlapPointAll(groundCheck_C.position);
 
         foreach (Collider2D other in otherAll) {
-            if (other.tag == "EventTrigger") {
+            if (other.tag == "EventTrigger")
+            {
                 StageTrigger_Link link = other.GetComponent<StageTrigger_Link>();
-                if (link != null) {
+                if (link != null)
+                {
                     link.Jump();
                 }
+            }
+            else if (other.tag == "KeyDoor") {
+                StageObject_KeyDoor keyDoor = other.GetComponent<StageObject_KeyDoor>();
+                keyDoor.OpenDoor();
             }
         }
     }

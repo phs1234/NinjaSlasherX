@@ -51,14 +51,34 @@ public class PlayerBodyCollider : MonoBehaviour
             {
                 PlayerController.score += 100000;
             }
-            else if (other.name == "Item_Hyoutan") {
+            else if (other.name == "Item_Hyoutan")
+            {
                 playerCtrl.SetHp(playerCtrl.hp + playerCtrl.hpMax, playerCtrl.hpMax);
-            } else if (other.name == "Item_Makimono") {
+            }
+            else if (other.name == "Item_Makimono")
+            {
                 //playerCtrl.superMode = true;
                 playerCtrl.GetComponent<Stage_AfterImage>().afterImageEnabled = true;
                 playerCtrl.basScaleX = 2.0f;
                 playerCtrl.transform.localScale = new Vector3(playerCtrl.basScaleX, 2.0f, 1.0f);
                 Invoke("SuperModeEnd", 10.0f);
+            }
+            else if (other.name == "Item_Key_A") {
+                PlayerController.score += 10000;
+                PlayerController.itemKeyA = true;
+                GameObject.Find("Stage_Item_Key_A").GetComponent<SpriteRenderer>().enabled = true;
+            }
+            else if (other.name == "Item_Key_B")
+            {
+                PlayerController.score += 10000;
+                PlayerController.itemKeyB = true;
+                GameObject.Find("Stage_Item_Key_B").GetComponent<SpriteRenderer>().enabled = true;
+            }
+            else if (other.name == "Item_Key_C")
+            {
+                PlayerController.score += 10000;
+                PlayerController.itemKeyC = true;
+                GameObject.Find("Stage_Item_Key_C").GetComponent<SpriteRenderer>().enabled = true;
             }
             Destroy(other.gameObject);
         }

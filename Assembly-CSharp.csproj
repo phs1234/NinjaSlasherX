@@ -86,6 +86,7 @@
     <Compile Include="Assets\Scripts\StageA_TimeEffect.cs" />
     <Compile Include="Assets\Scripts\StageObject_BlockA.cs" />
     <Compile Include="Assets\Scripts\StageObject_DogPile.cs" />
+    <Compile Include="Assets\Scripts\StageObject_KeyDoor.cs" />
     <Compile Include="Assets\Scripts\StageTrigger_Camera.cs" />
     <Compile Include="Assets\Scripts\StageTrigger_CheckPoint.cs" />
     <Compile Include="Assets\Scripts\StageTrigger_Link.cs" />
