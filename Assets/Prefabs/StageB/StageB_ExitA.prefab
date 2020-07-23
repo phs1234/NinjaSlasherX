@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 1572095162593790592}
   - component: {fileID: 4808746972749042723}
   - component: {fileID: 5304547951191203512}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: StageB_ExitA
   m_TagString: EventTrigger
   m_Icon: {fileID: 0}
@@ -166,7 +166,7 @@ GameObject:
   - component: {fileID: 3760624211173491473}
   - component: {fileID: 3760624211173491474}
   - component: {fileID: 3760624211173491475}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Stage_Arrow
   m_TagString: Untagged
   m_Icon: {fileID: 0}

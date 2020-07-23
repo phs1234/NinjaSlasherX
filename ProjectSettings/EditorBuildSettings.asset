@@ -20,4 +20,13 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/StageB_Puzzle_A3.unity
     guid: ddc304d9eb3e8c94580bb0aa7d3545cb
+  - enabled: 1
+    path: Assets/Scenes/StageB_Puzzle_B1.unity
+    guid: 3485417f31c4219438be62ea9713cf79
+  - enabled: 1
+    path: Assets/Scenes/StageB_Puzzle_C1.unity
+    guid: 19d40f32ba4f19a4cb314c43b1e003db
+  - enabled: 1
+    path: Assets/Scenes/StageB_Room.unity
+    guid: a0b99de56ce1f234eb2ad57849d907c3
   m_configObjects: {}

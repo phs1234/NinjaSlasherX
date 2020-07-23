@@ -11,7 +11,7 @@ public class StageObject_KeyDoor : MonoBehaviour
     void Awake()
     {
         openDoor = transform.Find("StageB_ExitA").gameObject;
-        closeDoor = transform.Find("StageB_Door_Key").gameObject;
+        closeDoor = transform.Find("StageB_DoorA_Key").gameObject;
         openDoor.SetActive(false);
     }
 

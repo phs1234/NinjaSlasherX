@@ -416,6 +416,7 @@ GameObject:
   - component: {fileID: 3113009873232636966}
   - component: {fileID: 3113009873232636968}
   - component: {fileID: 7762181297468669264}
+  - component: {fileID: 4764115273945594757}
   m_Layer: 0
   m_Name: StageB_keyDoor_B
   m_TagString: KeyDoor
@@ -494,3 +495,16 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 2.533432, y: 5.1621723}
   m_EdgeRadius: 0
+--- !u!114 &4764115273945594757
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3113009873232636969}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ad9891ad5e62ea74ba0cf03fea8df4de, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  keySprite: {fileID: 0}
