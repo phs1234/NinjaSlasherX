@@ -27,6 +27,42 @@ EditorBuildSettings:
     path: Assets/Scenes/StageB_Puzzle_C1.unity
     guid: 19d40f32ba4f19a4cb314c43b1e003db
   - enabled: 1
+    path: Assets/Scenes/StageB_Puzzle_D1.unity
+    guid: 9daf904288272c74cbe04efbdfa98b50
+  - enabled: 1
+    path: Assets/Scenes/SampleScene.unity
+    guid: 6101e9e238bf34997b2bf02b0820d76e
+  - enabled: 1
+    path: Assets/Scenes/StageB_Puzzle_E1.unity
+    guid: 003b2c2d07c26d64583b80c818ac704d
+  - enabled: 1
+    path: Assets/Scenes/StageB_Puzzle_E2.unity
+    guid: d39d55d58a35e3445b25f921f1ffe81f
+  - enabled: 1
+    path: Assets/Scenes/StageB_Puzzle_G1.unity
+    guid: 5133314bc667aa44b8ff0edae3d6d859
+  - enabled: 1
+    path: Assets/Scenes/StageB_Puzzle_H1.unity
+    guid: e89c2f278d9fa9e44aa084ccc5335c61
+  - enabled: 1
     path: Assets/Scenes/StageB_Room.unity
     guid: a0b99de56ce1f234eb2ad57849d907c3
+  - enabled: 1
+    path: Assets/Scenes/StageB_Room_A.unity
+    guid: 57e9e579c248f6046b6e6976acc06496
+  - enabled: 1
+    path: Assets/Scenes/StageB_Room_B.unity
+    guid: 0131750adb9f90a47b19eea8d8e59079
+  - enabled: 1
+    path: Assets/Scenes/StageB_Room_C.unity
+    guid: 40acf3f5d7cdc6d43866cba7f9ccbf8e
+  - enabled: 1
+    path: Assets/Scenes/StageB_Warp_A1.unity
+    guid: e5e0d674d7e7d324c8c25acca34bd970
+  - enabled: 1
+    path: Assets/Scenes/StageB_Warp_A2.unity
+    guid: 56c7141870fe3a641aa68735847a5216
+  - enabled: 1
+    path: Assets/Scenes/StageB_Warp_A3.unity
+    guid: f5a644abc48c444438fad02b1716fe05
   m_configObjects: {}

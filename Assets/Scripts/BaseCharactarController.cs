@@ -109,6 +109,15 @@ public class BaseCharactarController : MonoBehaviour
         }
 
         FixedUpdateCharacter();
+        
+        if (grounded) {
+            speedVxAddPower = 0.0f;
+       
+            if (groundCheck_OnMoveObject != null) { 
+                speedVxAddPower = groundCheck_OnMoveObject.GetComponentInParent<Rigidbody2D>().velocity.x;
+            }
+        }
+
         // 강제로 0.5초간 x축으로 힘주기
         if (addForceVxEnabled)
         {

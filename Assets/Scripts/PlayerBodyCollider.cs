@@ -13,10 +13,12 @@ public class PlayerBodyCollider : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.tag == "EnemyArm") {
+        if (other.tag == "EnemyArm")
+        {
             EnemyController enemyCtrl = other.GetComponentInParent<EnemyController>();
 
-            if (enemyCtrl.attackEnabled) {
+            if (enemyCtrl.attackEnabled)
+            {
                 enemyCtrl.attackEnabled = false;
 
                 // 맞은 쪽으로 보기
@@ -24,10 +26,13 @@ public class PlayerBodyCollider : MonoBehaviour
                 playerCtrl.AddForceAnimatorVx(-enemyCtrl.attackNockBackVector.x); //왜 음수지?
                 playerCtrl.ActionDamage(enemyCtrl.attackDamage);
             }
-        } else if (other.tag == "EnemyArmBullet") {
+        }
+        else if (other.tag == "EnemyArmBullet")
+        {
             FireBullet fireBullet = other.transform.GetComponent<FireBullet>();
 
-            if (fireBullet.attackEnabled) {
+            if (fireBullet.attackEnabled)
+            {
                 fireBullet.attackEnabled = false;
 
                 // 맞은 쪽으로 보기
@@ -37,11 +42,34 @@ public class PlayerBodyCollider : MonoBehaviour
                 playerCtrl.ActionDamage(fireBullet.attackDamage);
                 Destroy(other.gameObject);
             }
-        } else if (other.tag == "CameraTrigger") {
+        }
+        else if (other.tag == "CameraTrigger")
+        {
             Camera.main.GetComponent<CameraFollow>().SetCamera(other.GetComponent<StageTrigger_Camera>().param);
-        } else if (other.tag == "EventTrigger") {
+        }
+        else if (other.name == "DeathCollider")
+        {
+            playerCtrl.Dead(false);
+        }
+        else if (other.name == "DeathCollider_Rock") {
+            if (playerCtrl.transform.position.y < other.transform.position.y) {
+                if ((playerCtrl.transform.position.x < other.transform.position.x && other.transform.parent.GetComponent<Rigidbody2D>().velocity.x < -1.0f) ||
+                    (playerCtrl.transform.position.x > other.transform.position.x && other.transform.parent.GetComponent<Rigidbody2D>().velocity.x > 1.0f) ||
+                    (other.transform.parent.GetComponent<Rigidbody2D>().velocity.y < -1.0f)) {
+                    playerCtrl.Dead(false);
+                }
+            }
+        }
+        else if (other.tag == "DestroySwitch")  
+        {
+            other.GetComponent<StageObject_DestroySwitch>().DestroyStageObject();
+        }
+        else if (other.tag == "EventTrigger")
+        {
             other.SendMessage("OnTriggerEnter2D_PlayerEvent", gameObject);
-        } else if (other.tag == "Item") {
+        }
+        else if (other.tag == "Item")
+        {
             if (other.name == "Item_Koban")
             {
                 PlayerController.score += 10;
@@ -63,7 +91,8 @@ public class PlayerBodyCollider : MonoBehaviour
                 playerCtrl.transform.localScale = new Vector3(playerCtrl.basScaleX, 2.0f, 1.0f);
                 Invoke("SuperModeEnd", 10.0f);
             }
-            else if (other.name == "Item_Key_A") {
+            else if (other.name == "Item_Key_A")
+            {
                 PlayerController.score += 10000;
                 PlayerController.itemKeyA = true;
                 GameObject.Find("Stage_Item_Key_A").GetComponent<SpriteRenderer>().enabled = true;
@@ -84,12 +113,30 @@ public class PlayerBodyCollider : MonoBehaviour
         }
     }
 
+    private void OnTriggerStay2D(Collider2D other)
+    {
+        if (other.tag == "DamageObject") {
+            float damage = other.GetComponent<StageObject_Damage>().damage * Time.fixedDeltaTime;
 
-    void SuperModeEnd() {
+            if (playerCtrl.SetHp(playerCtrl.hp - damage, playerCtrl.hpMax)) {
+                playerCtrl.Dead(true);
+            }
+        }
+    }
+
+    void SuperModeEnd()
+    {
         //playerCtrl.superMode = false;
         playerCtrl.GetComponent<Stage_AfterImage>().afterImageEnabled = false;
         playerCtrl.basScaleX = 1.0f;
         playerCtrl.transform.localScale = new Vector3(playerCtrl.basScaleX, 1.0f, 1.0f);
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.name == "DeathCollider") {
+            playerCtrl.Dead(false);
+        }
     }
 
     private void OnCollisionStay2D(Collision2D col)
@@ -97,7 +144,8 @@ public class PlayerBodyCollider : MonoBehaviour
         if (!playerCtrl.jumped &&
             (col.gameObject.tag == "Road") ||
              col.gameObject.tag == "MoveObject" ||
-             col.gameObject.tag == "Enemy") {
+             col.gameObject.tag == "Enemy")
+        {
             playerCtrl.groundY = transform.parent.transform.position.y;
         }
     }

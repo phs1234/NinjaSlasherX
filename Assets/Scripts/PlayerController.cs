@@ -133,9 +133,14 @@ public class PlayerController : BaseCharactarController
                     link.Jump();
                 }
             }
-            else if (other.tag == "KeyDoor") {
+            else if (other.tag == "KeyDoor")
+            {
                 StageObject_KeyDoor keyDoor = other.GetComponent<StageObject_KeyDoor>();
                 keyDoor.OpenDoor();
+            }
+            else if (other.name == "Stage_Switch_Body") {
+                StageObject_Switch sw = other.transform.parent.GetComponent<StageObject_Switch>();
+                sw.SwitchTurn();
             }
         }
     }

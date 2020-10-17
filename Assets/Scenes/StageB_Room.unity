@@ -26465,6 +26465,11 @@ PrefabInstance:
       propertyPath: keySprite
       value: 
       objectReference: {fileID: 1866577404}
+    - target: {fileID: 7739355569788968528, guid: fb741cd82e6ec864fad1a5c728623643,
+        type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fb741cd82e6ec864fad1a5c728623643, type: 3}
 --- !u!1001 &4833888137463563021

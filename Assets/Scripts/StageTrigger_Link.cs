@@ -25,8 +25,6 @@ public class StageTrigger_Link : MonoBehaviour
         if (!jumpInput) {
             Jump();
         }
-
-        Debug.Log("jumpInput: " + jumpInput);
     }
 
     public void Jump() {
