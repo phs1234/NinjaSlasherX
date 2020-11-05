@@ -49,6 +49,8 @@ public class BaseCharactarController : MonoBehaviour
 
     public GameObject[] fireObjectList;
 
+    protected AudioSource[] seAnimationList;
+
     protected virtual void Awake() {
         animator = GetComponent<Animator>();
 
@@ -108,7 +110,8 @@ public class BaseCharactarController : MonoBehaviour
             }
         }
 
-        FixedUpdateCharacter();
+        FixedUpdateCharacter();
+
         
         if (grounded) {
             speedVxAddPower = 0.0f;
@@ -290,5 +293,9 @@ public class BaseCharactarController : MonoBehaviour
         }
 
         return false;
+    }
+
+    public virtual void PlayAnimation(int i) {
+        seAnimationList[i].Play();
     }
 }

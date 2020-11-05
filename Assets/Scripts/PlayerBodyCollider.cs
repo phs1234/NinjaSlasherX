@@ -73,15 +73,17 @@ public class PlayerBodyCollider : MonoBehaviour
             if (other.name == "Item_Koban")
             {
                 PlayerController.score += 10;
-                Debug.Log("Item_Koban");
+                AppSound.instance.SE_ITEM_KOBAN.Play();
             }
             else if (other.name == "Item_Ohoban")
             {
                 PlayerController.score += 100000;
+                AppSound.instance.SE_ITEM_OHBAN.Play();
             }
             else if (other.name == "Item_Hyoutan")
             {
                 playerCtrl.SetHp(playerCtrl.hp + playerCtrl.hpMax, playerCtrl.hpMax);
+                AppSound.instance.SE_ITEM_HYOUTAN.Play();
             }
             else if (other.name == "Item_Makimono")
             {
@@ -90,24 +92,28 @@ public class PlayerBodyCollider : MonoBehaviour
                 playerCtrl.basScaleX = 2.0f;
                 playerCtrl.transform.localScale = new Vector3(playerCtrl.basScaleX, 2.0f, 1.0f);
                 Invoke("SuperModeEnd", 10.0f);
+                AppSound.instance.SE_ITEM_MAKIMONO.Play();
             }
             else if (other.name == "Item_Key_A")
             {
                 PlayerController.score += 10000;
                 PlayerController.itemKeyA = true;
                 GameObject.Find("Stage_Item_Key_A").GetComponent<SpriteRenderer>().enabled = true;
+                AppSound.instance.SE_ITEM_KEY.Play();
             }
             else if (other.name == "Item_Key_B")
             {
                 PlayerController.score += 10000;
                 PlayerController.itemKeyB = true;
                 GameObject.Find("Stage_Item_Key_B").GetComponent<SpriteRenderer>().enabled = true;
+                AppSound.instance.SE_ITEM_KEY.Play();
             }
             else if (other.name == "Item_Key_C")
             {
                 PlayerController.score += 10000;
                 PlayerController.itemKeyC = true;
                 GameObject.Find("Stage_Item_Key_C").GetComponent<SpriteRenderer>().enabled = true;
+                AppSound.instance.SE_ITEM_KEY.Play();
             }
             Destroy(other.gameObject);
         }

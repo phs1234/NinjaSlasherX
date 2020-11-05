@@ -121,6 +121,18 @@ public class PlayerController : BaseCharactarController
         hud.Find("Stage_Item_Key_C").GetComponent<SpriteRenderer>().enabled = itemKeyC;
     }
 
+    protected override void Start()
+    {
+        base.Start();
+
+        seAnimationList = new AudioSource[5];
+        seAnimationList[0] = AppSound.instance.SE_ATK_A1;
+        seAnimationList[1] = AppSound.instance.SE_ATK_A2;
+        seAnimationList[2] = AppSound.instance.SE_ATK_A3;
+        seAnimationList[3] = AppSound.instance.SE_ATK_ARIAL;
+        seAnimationList[4] = AppSound.instance.SE_MOV_JUMP;
+    }
+
     public void ActionEtc() {
         Collider2D[] otherAll = Physics2D.OverlapPointAll(groundCheck_C.position);
 
