@@ -4,8 +4,7 @@ using UnityEditor.Build.Content;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class AppSound : MonoBehaviour
-{
+public class AppSound : MonoBehaviour {
     public static AppSound instance = null;
 
     [System.NonSerialized] public zFoxSoundManager fm;
@@ -58,8 +57,7 @@ public class AppSound : MonoBehaviour
 
     string sceneName = "non";
 
-    void Awake()
-    {
+    void Awake() {
         fm = GameObject.Find("zFoxSoundManager").GetComponent<zFoxSoundManager>();
 
         fm.CreateGroup("BGM");
@@ -116,65 +114,51 @@ public class AppSound : MonoBehaviour
         instance = this;
     }
 
-    void Update()
-    {
+    void Update() {
         if (sceneName != SceneManager.GetActiveScene().name) {
             sceneName = SceneManager.GetActiveScene().name;
 
-            if (sceneName == "Menu_Logo")
-            {
+            fm.SetVolume("BGM", SaveData.SoundBGMVolume);
+            fm.SetVolume("SE", SaveData.SoundSEVolume);
+
+            if (sceneName == "Menu_Logo") {
                 BGM_LOGO.Play();
-            }
-            else if (sceneName == "Menu_Title")
-            {
-                if (!BGM_TITLE.isPlaying)
-                {
+            } else if (sceneName == "Menu_Title") {
+                if (!BGM_TITLE.isPlaying) {
                     fm.Stop("BGM");
                     BGM_TITLE.Play();
-                    fm.FadeInVolume(BGM_TITLE, 1.0f, 1.0f, true);
+                    fm.FadeInVolume(BGM_TITLE, SaveData.SoundBGMVolume, 1.0f, true);
                 }
-            }
-            else if (sceneName == "Menu_Option" || sceneName == "Menu_HiScore" || sceneName == "Menu_Option")
-            {
+            } else if (sceneName == "Menu_Option" || sceneName == "Menu_HiScore" || sceneName == "Menu_Option") {
 
-            }
-            else if (sceneName == "StageA")
-            {
+            } else if (sceneName == "StageA") {
+                // fadein 과 fadeout이 바뀐 것 같다 
                 fm.FadeOutVolumeGroup("BGM", BGM_STAGEA, 0, 1, false);
-                fm.FadeInVolume(BGM_STAGEA, 1.0f, 1.0f, true);
+                fm.FadeInVolume(BGM_TITLE, 1.0f, 1.0f, true);
                 BGM_STAGEA.loop = true;
                 BGM_STAGEA.Play();
-            }
-            else if (sceneName == "StageB_Room")
-            {
+            } else if (sceneName == "StageB_Room") {
                 fm.Stop("BGM");
                 BGM_STAGEB_ROOMSAKURA.loop = true;
                 BGM_STAGEB_ROOMSAKURA.Play();
-            }
-            else if (sceneName == "StageB_Room_A" || sceneName == "StageB_Room_B" || sceneName == "StageB_Room_C")
-            {
+            } else if (sceneName == "StageB_Room_A" || sceneName == "StageB_Room_B" || sceneName == "StageB_Room_C") {
                 fm.Stop("BGM");
                 BGM_BOSSA.loop = true;
                 BGM_BOSSA.Play();
-            }
-            else if (sceneName == "StageB_Boss")
-            {
+            } else if (sceneName == "StageB_Boss") {
                 fm.Stop("BGM");
                 BGM_BOSSB.loop = true;
                 BGM_BOSSB.Play();
-            }
-            else if (sceneName == "StageZ_Ending")
-            {
+            } else if (sceneName == "StageZ_Ending") {
                 fm.Stop("BGM");
                 BGM_ENDING.Play();
-            }
-            else {
+            } else {
                 if (!BGM_STAGEB.isPlaying) {
                     fm.Stop("BGM");
                     BGM_STAGEB.loop = true;
                     BGM_STAGEB.Play();
                 }
             }
-        }        
+        }
     }
 }

@@ -63,6 +63,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Scripts\ApplicationStartup.cs" />
     <Compile Include="Assets\Scripts\AppSound.cs" />
     <Compile Include="Assets\Scripts\BaseCharactarController.cs" />
     <Compile Include="Assets\Scripts\CameraFollow.cs" />
@@ -81,6 +82,7 @@
     <Compile Include="Assets\Scripts\PlayerBodyCollider.cs" />
     <Compile Include="Assets\Scripts\PlayerController.cs" />
     <Compile Include="Assets\Scripts\PlayerMain.cs" />
+    <Compile Include="Assets\Scripts\SaveData.cs" />
     <Compile Include="Assets\Scripts\Stage_AfterImage.cs" />
     <Compile Include="Assets\Scripts\Stage_CreateStaticShadowAll.cs" />
     <Compile Include="Assets\Scripts\Stage_Shadow.cs" />
@@ -100,10 +102,13 @@
     <Compile Include="Assets\Scripts\StageTrigger_EventSound.cs" />
     <Compile Include="Assets\Scripts\StageTrigger_Link.cs" />
     <Compile Include="Assets\Scripts\Unity2DSortingLayer.cs" />
+    <Compile Include="Assets\Scripts\zFoxDataPackString.cs" />
     <Compile Include="Assets\Scripts\zFoxDontDestroyOnLoad.cs" />
+    <Compile Include="Assets\Scripts\zFoxFadeFilter.cs" />
     <Compile Include="Assets\Scripts\zFoxGameObjectLoader.cs" />
     <Compile Include="Assets\Scripts\zFoxSoundManager.cs" />
     <Compile Include="Assets\Scripts\zFoxTween.cs" />
+    <Compile Include="Assets\Scripts\zFoxUID.cs" />
     <Compile Include="Assets\Scripts\zFoxVirtualPad.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark01.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark01_UGUI.cs" />

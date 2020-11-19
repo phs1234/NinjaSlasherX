@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 7628392142273259423}
   - component: {fileID: 7628392142273259422}
   - component: {fileID: 7628392142273259421}
+  - component: {fileID: 114893163980237742}
   m_Layer: 13
   m_Name: Item_Koban
   m_TagString: Item
@@ -124,3 +125,17 @@ MonoBehaviour:
     filterMode: 0
     filterMin: 0
     filterMax: 0
+--- !u!114 &114893163980237742
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7628392142273259420}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 81890536a7eadba44a38ad99034eab4f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  type: 0
+  uid: (non)

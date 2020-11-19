@@ -147,6 +147,15 @@ public class zFoxSoundManager : MonoBehaviour
         }
     }
 
+    public void SetVolume(string groupName, float vol) {
+        GameObject go = GetGroup(groupName);
+        AudioSource[] audioSourceList = go.GetComponents<AudioSource>();
+
+        foreach (AudioSource audioSource in audioSourceList) {
+            SetVolume(audioSource, vol);
+        }
+    }
+
     class Fade {
         public AudioSource fadeAudio;
         public float targetV;

@@ -1,9 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
-public class PlayerController : BaseCharactarController
-{
+public class PlayerController : BaseCharactarController {
 
     public float initHpMax = 20.0f;
     [Range(0.1f, 100.0f)] public float initSpeed = 12.0f;
@@ -18,6 +18,7 @@ public class PlayerController : BaseCharactarController
     public static float checkPointHp = 0;
 
     public static bool initParam = true;
+    public static float startFadeTime = 2.0f;
 
     public static bool itemKeyA = false;
     public static bool itemKeyB = false;
@@ -32,16 +33,16 @@ public class PlayerController : BaseCharactarController
     [System.NonSerialized] public Vector3 enemyActiveZonePointB;
 
     /* 해시로 등호비교하는 것이 문자열로 등비교하는 것보다 처리가 빠르다 */
-    public readonly static int ANISTS_Idle          = Animator.StringToHash("Base Layer.Player_Idle");
-    public readonly static int ANISTS_Walk          = Animator.StringToHash("Base Layer.Player_Walk");
-    public readonly static int ANISTS_Run           = Animator.StringToHash("Base Layer.Player_Run");
-    public readonly static int ANISTS_Jump          = Animator.StringToHash("Base Layer.Player_Jump");
-    public readonly static int ANISTS_ATTACK_A      = Animator.StringToHash("Base Layer.Player_ATK_A");
-    public readonly static int ANISTS_ATTACK_B      = Animator.StringToHash("Base Layer.Player_ATK_B");
-    public readonly static int ANISTS_ATTACK_C      = Animator.StringToHash("Base Layer.Player_ATK_C");
-    public readonly static int ANISTS_ATTACKJUMP_A  = Animator.StringToHash("Base Layer.Player_ATKJUMP_A");
-    public readonly static int ANISTS_ATTACKJUMP_B  = Animator.StringToHash("Base Layer.Player_ATKJUMP_B");
-    public readonly static int ANISTS_DEAD          = Animator.StringToHash("Base Layer.Player_Dead");
+    public readonly static int ANISTS_Idle = Animator.StringToHash("Base Layer.Player_Idle");
+    public readonly static int ANISTS_Walk = Animator.StringToHash("Base Layer.Player_Walk");
+    public readonly static int ANISTS_Run = Animator.StringToHash("Base Layer.Player_Run");
+    public readonly static int ANISTS_Jump = Animator.StringToHash("Base Layer.Player_Jump");
+    public readonly static int ANISTS_ATTACK_A = Animator.StringToHash("Base Layer.Player_ATK_A");
+    public readonly static int ANISTS_ATTACK_B = Animator.StringToHash("Base Layer.Player_ATK_B");
+    public readonly static int ANISTS_ATTACK_C = Animator.StringToHash("Base Layer.Player_ATK_C");
+    public readonly static int ANISTS_ATTACKJUMP_A = Animator.StringToHash("Base Layer.Player_ATKJUMP_A");
+    public readonly static int ANISTS_ATTACKJUMP_B = Animator.StringToHash("Base Layer.Player_ATKJUMP_B");
+    public readonly static int ANISTS_DEAD = Animator.StringToHash("Base Layer.Player_Dead");
 
     LineRenderer hudHpBar;
     TextMesh hudScore;
@@ -92,11 +93,36 @@ public class PlayerController : BaseCharactarController
         enemyActiveZonePointB = new Vector3(boxCol2D.offset.x + boxCol2D.size.x / 2.0f, boxCol2D.offset.y + boxCol2D.size.y / 2.0f);
         boxCol2D.transform.gameObject.SetActive(false);
 
-        if (initParam)
-        {
-            SetHp(initHpMax, initHpMax);
-            initParam = false;
+        if (SaveData.continuePlay) {
+            // ! 이게 뭐지?? 없어야 되는 것 같은데1!!
+            if (!SaveData.LoadGamePlay(true)) {
+                initParam = false;
+            }
+
+            SaveData.continuePlay = false;
         }
+
+        if (initParam) {
+            SetHp(initHpMax, initHpMax);
+
+            PlayerController.score = 0;
+            PlayerController.checkPointEnabled = false;
+            PlayerController.checkPointLabelName = "";
+            PlayerController.checkPointSceneName = Application.loadedLevelName;
+            PlayerController.checkPointHp = initHpMax;
+            PlayerController.itemKeyA = false;
+            PlayerController.itemKeyB = false;
+            PlayerController.itemKeyC = false;
+
+            SaveData.DeleteAndInit(false);
+            SaveData.SaveGamePlay();
+
+            initParam = false;
+        } else {
+            /* 링크를 타고 넘어와서 처음 실행될 때 스테이지 정보만 저장한다 */
+            SaveData.LoadGamePlay(false);
+        }
+
         if (SetHp(PlayerController.nowHp, PlayerController.nowHpMax)) {
             SetHp(1, initHpMax);
         }
@@ -112,8 +138,9 @@ public class PlayerController : BaseCharactarController
                     break;
                 }
             }
-
         }
+
+        GameObject.Find("VRPad").SetActive(SaveData.VRPadEnabled);
 
         Transform hud = GameObject.FindGameObjectWithTag("SubCamera").transform;
         hud.Find("Stage_Item_Key_A").GetComponent<SpriteRenderer>().enabled = itemKeyA;
@@ -121,9 +148,11 @@ public class PlayerController : BaseCharactarController
         hud.Find("Stage_Item_Key_C").GetComponent<SpriteRenderer>().enabled = itemKeyC;
     }
 
-    protected override void Start()
-    {
+    protected override void Start() {
         base.Start();
+
+        zFoxFadeFilter.instance.FadeIn(Color.black, startFadeTime);
+        startFadeTime = 2.0f;
 
         seAnimationList = new AudioSource[5];
         seAnimationList[0] = AppSound.instance.SE_ATK_A1;
@@ -137,20 +166,15 @@ public class PlayerController : BaseCharactarController
         Collider2D[] otherAll = Physics2D.OverlapPointAll(groundCheck_C.position);
 
         foreach (Collider2D other in otherAll) {
-            if (other.tag == "EventTrigger")
-            {
+            if (other.tag == "EventTrigger") {
                 StageTrigger_Link link = other.GetComponent<StageTrigger_Link>();
-                if (link != null)
-                {
+                if (link != null) {
                     link.Jump();
                 }
-            }
-            else if (other.tag == "KeyDoor")
-            {
+            } else if (other.tag == "KeyDoor") {
                 StageObject_KeyDoor keyDoor = other.GetComponent<StageObject_KeyDoor>();
                 keyDoor.OpenDoor();
-            }
-            else if (other.name == "Stage_Switch_Body") {
+            } else if (other.name == "Stage_Switch_Body") {
                 StageObject_Switch sw = other.transform.parent.GetComponent<StageObject_Switch>();
                 sw.SwitchTurn();
             }
@@ -163,13 +187,11 @@ public class PlayerController : BaseCharactarController
         hudHpBar.SetPosition(1, new Vector3(5.0f * (hp / hpMax), 0.0f, 0.0f));
         hudScore.text = string.Format("Score {0}", score);
 
-        if (comboTimer <= 0.0f)
-        {
+        if (comboTimer <= 0.0f) {
             hudCombo.gameObject.SetActive(false);
             comboCount = 0;
             comboTimer = 0.0f;
-        }
-        else {
+        } else {
             comboTimer -= Time.deltaTime;
             if (comboTimer > 5.0f) {
                 comboTimer = 5.0f;
@@ -205,8 +227,7 @@ public class PlayerController : BaseCharactarController
                     GetComponent<Rigidbody2D>().gravityScale = gravityScale;
                 }
             }
-        }
-        else {
+        } else {
             // 접지 중 1단 점프로 대기
             jumpCount = 0;
             GetComponent<Rigidbody2D>().gravityScale = gravityScale;
@@ -242,15 +263,12 @@ public class PlayerController : BaseCharactarController
         //Camera.main.transform.position = transform.position - Vector3.forward;
     }
 
-    public void EnableAttackInput()
-    {
+    public void EnableAttackInput() {
         atkInputEnabled = true;
     }
 
-    public void SetNextAttack(string name)
-    {
-        if (atkInputNow == true)
-        {
+    public void SetNextAttack(string name) {
+        if (atkInputNow == true) {
             atkInputNow = false;
             animator.Play(name);
         }
@@ -268,8 +286,7 @@ public class PlayerController : BaseCharactarController
         float moveSpeed = Mathf.Clamp(Mathf.Abs(n), -1.0f, +1.0f);
         animator.SetFloat("MovSpeed", moveSpeed);
 
-        if (n != 0.0f)
-        {
+        if (n != 0.0f) {
             // 방향 데이터 갱
             dir = Mathf.Sign(n);
 
@@ -277,8 +294,7 @@ public class PlayerController : BaseCharactarController
 
             // 속도 정하기
             speedVx = initSpeed * moveSpeed * dir;
-        }
-        else {
+        } else {
             // 이동 정지
             breakEnabled = true;
         }
@@ -295,14 +311,11 @@ public class PlayerController : BaseCharactarController
         if (stateInfo.nameHash == ANISTS_Idle ||
             stateInfo.nameHash == ANISTS_Walk ||
             stateInfo.nameHash == ANISTS_Run ||
-            stateInfo.nameHash == ANISTS_Jump && GetComponent<Rigidbody2D>().gravityScale >= gravityScale)
-        {
-            switch (jumpCount)
-            {
+            stateInfo.nameHash == ANISTS_Jump && GetComponent<Rigidbody2D>().gravityScale >= gravityScale) {
+            switch (jumpCount) {
                 // 1단 점프
                 case 0:
-                    if (grounded)
-                    {
+                    if (grounded) {
                         animator.SetTrigger("Jump");
                         GetComponent<Rigidbody2D>().velocity = Vector2.up * 30.0f;
                         jumpStartTime = Time.fixedTime;
@@ -312,8 +325,7 @@ public class PlayerController : BaseCharactarController
                     break;
                 // 2단 점프
                 case 1:
-                    if (!grounded)
-                    {
+                    if (!grounded) {
                         animator.Play("Player_Jump", 0, 0.0f);
                         GetComponent<Rigidbody2D>().velocity = new Vector2(GetComponent<Rigidbody2D>().velocity.x, 20.0f);
                         jumped = true;
@@ -326,22 +338,20 @@ public class PlayerController : BaseCharactarController
 
     public void ActionAttack() {
         AnimatorStateInfo stateInfo = animator.GetCurrentAnimatorStateInfo(0);
-     
+
 
         if (stateInfo.nameHash == ANISTS_Idle ||
             stateInfo.nameHash == ANISTS_Walk ||
-            stateInfo.nameHash == ANISTS_Run  ||
+            stateInfo.nameHash == ANISTS_Run ||
             stateInfo.nameHash == ANISTS_Jump ||
-            stateInfo.nameHash == ANISTS_ATTACK_C)
-        {
+            stateInfo.nameHash == ANISTS_ATTACK_C) {
             animator.SetTrigger("Attack_A");
             if (stateInfo.nameHash == ANISTS_Jump ||
                 stateInfo.nameHash == ANISTS_ATTACK_C) {
                 GetComponent<Rigidbody2D>().velocity = Vector2.zero;
                 GetComponent<Rigidbody2D>().gravityScale = 0.1f;
             }
-        }
-        else {
+        } else {
             if (atkInputEnabled) {
                 atkInputEnabled = false;
                 atkInputNow = true;
@@ -357,12 +367,10 @@ public class PlayerController : BaseCharactarController
              stateInfo.nameHash == ANISTS_Walk ||
              stateInfo.nameHash == ANISTS_Run ||
              stateInfo.nameHash == ANISTS_ATTACK_A ||
-             stateInfo.nameHash == ANISTS_ATTACK_B))
-        {
+             stateInfo.nameHash == ANISTS_ATTACK_B)) {
             animator.SetTrigger("Attack_C");
             jumpCount = 2;
-        }
-        else {
+        } else {
             if (atkInputEnabled) {
                 atkInputEnabled = false;
                 atkInputNow = true;
@@ -401,35 +409,49 @@ public class PlayerController : BaseCharactarController
 
         base.Dead(gameOver);
 
+        zFoxFadeFilter.instance.FadeOut(Color.black, 2.0f);
+
         SetHp(0, hpMax);
         Invoke("GameOver", 3.0f);
 
-        if (gameOver)
-        {
+        if (gameOver) {
             SetHp(0, hpMax);
             Invoke("GameOver", 3.0f);
-        }
-        else {
+        } else {
             SetHp(hp / 2, hpMax);
             Invoke("GameReset", 3.0f);
         }
 
         GameObject.Find("HUD_Dead").GetComponent<MeshRenderer>().enabled = true;
         GameObject.Find("HUD_DeadShadow").GetComponent<MeshRenderer>().enabled = true;
+
+        if (GameObject.Find("VRPad") != null) {
+            GameObject.Find("VRPad").SetActive(false);
+        }
     }
 
     public void GameOver() {
+        SaveData.SaveHiScore(score);
         PlayerController.score = 0;
         PlayerController.nowHp = PlayerController.checkPointHp;
+        SaveData.SaveGamePlay();
+
+        AppSound.instance.fm.Stop("BGM");
+        if (SaveData.newRecord > 0) {
+            AppSound.instance.BGM_HISCORE_RANKIN.Play();
+        } else {
+            AppSound.instance.BGM_HISCORE.Play();
+        }
+        
         Application.LoadLevel(Application.loadedLevelName);
     }
 
     void GameReset() {
+        SaveData.SaveGamePlay();
         Application.LoadLevel(Application.loadedLevelName);
     }
 
-    public override bool SetHp(float _hp, float _hpMax)
-    {
+    public override bool SetHp(float _hp, float _hpMax) {
         if (_hp > _hpMax) {
             _hp = _hpMax;
         }

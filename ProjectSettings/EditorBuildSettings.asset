@@ -39,6 +39,12 @@ EditorBuildSettings:
     path: Assets/Scenes/StageB_Puzzle_E2.unity
     guid: d39d55d58a35e3445b25f921f1ffe81f
   - enabled: 1
+    path: Assets/Scenes/StageB_Puzzle_F1.unity
+    guid: 77dc964ad4f546941859ae9dc46ba7ee
+  - enabled: 1
+    path: Assets/Scenes/StageB_Puzzle_F2.unity
+    guid: 63ae5f21d3c43ad489be705e59255346
+  - enabled: 1
     path: Assets/Scenes/StageB_Puzzle_G1.unity
     guid: 5133314bc667aa44b8ff0edae3d6d859
   - enabled: 1
@@ -65,4 +71,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/StageB_Warp_A3.unity
     guid: f5a644abc48c444438fad02b1716fe05
+  - enabled: 1
+    path: Assets/Scenes/StageB_Boss.unity
+    guid: c20be575468ecc0469fb7f264eb4aba6
   m_configObjects: {}

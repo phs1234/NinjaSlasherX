@@ -2,8 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class StageTrigger_Link : MonoBehaviour
-{
+public class StageTrigger_Link : MonoBehaviour {
     public string jumpSceneName;
     public string jumpLabelName;
 
@@ -14,14 +13,15 @@ public class StageTrigger_Link : MonoBehaviour
     Transform playerTrfm;
     PlayerController playerCtrl;
 
-    private void Awake()
-    {
+    public bool save = true;
+    public bool sePlay = true;
+
+    private void Awake() {
         playerTrfm = PlayerController.GetTransform();
         playerCtrl = playerTrfm.GetComponent<PlayerController>();
     }
 
-    void OnTriggerEnter2D_PlayerEvent(GameObject go)
-    {
+    void OnTriggerEnter2D_PlayerEvent(GameObject go) {
         if (!jumpInput) {
             Jump();
         }
@@ -36,6 +36,10 @@ public class StageTrigger_Link : MonoBehaviour
         PlayerController.checkPointLabelName = jumpLabelName;
         PlayerController.checkPointSceneName = jumpSceneName;
         PlayerController.checkPointHp = PlayerController.nowHp;
+        
+        if (save) {
+            SaveData.SaveGamePlay();
+        }
 
         playerCtrl.ActionMove(0.0f);
         playerCtrl.activeSts = false;
@@ -46,22 +50,18 @@ public class StageTrigger_Link : MonoBehaviour
     void JumpWork() {
         playerCtrl.activeSts = true;
 
-        if (Application.loadedLevelName == jumpSceneName)
-        {
+        if (Application.loadedLevelName == jumpSceneName) {
             GameObject[] stageLinkList = GameObject.FindGameObjectsWithTag("EventTrigger");
 
-            foreach (GameObject stageLink in stageLinkList)
-            {
-                if (stageLink.GetComponent<StageTrigger_CheckPoint>().labelName == jumpLabelName)
-                {
+            foreach (GameObject stageLink in stageLinkList) {
+                if (stageLink.GetComponent<StageTrigger_CheckPoint>().labelName == jumpLabelName) {
                     playerTrfm.position = stageLink.transform.position;
                     playerCtrl.groundY = playerTrfm.position.y;
                     Camera.main.transform.position = new Vector3(playerTrfm.position.x, playerTrfm.position.y, -10.0f);
                     break;
                 }
             }
-        }
-        else {
+        } else {
             Application.LoadLevel(jumpSceneName);
         }
     }
