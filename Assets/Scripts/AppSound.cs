@@ -138,6 +138,7 @@ public class AppSound : MonoBehaviour {
                 BGM_STAGEA.loop = true;
                 BGM_STAGEA.Play();
             } else if (sceneName == "StageB_Room") {
+                Debug.Log("벚꽃이 내려와");
                 fm.Stop("BGM");
                 BGM_STAGEB_ROOMSAKURA.loop = true;
                 BGM_STAGEB_ROOMSAKURA.Play();

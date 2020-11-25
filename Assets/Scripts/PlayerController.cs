@@ -17,12 +17,12 @@ public class PlayerController : BaseCharactarController {
     public static string checkPointLabelName = "";
     public static float checkPointHp = 0;
 
-    public static bool initParam = true;
-    public static float startFadeTime = 2.0f;
-
     public static bool itemKeyA = false;
     public static bool itemKeyB = false;
     public static bool itemKeyC = false;
+
+    public static bool initParam = true;
+    public static float startFadeTime = 2.0f;
 
     [System.NonSerialized] public float groundY = 0.0f;
     [System.NonSerialized] public bool superMode = false;
@@ -350,7 +350,7 @@ public class PlayerController : BaseCharactarController {
                 stateInfo.nameHash == ANISTS_ATTACK_C) {
                 GetComponent<Rigidbody2D>().velocity = Vector2.zero;
                 GetComponent<Rigidbody2D>().gravityScale = 0.1f;
-            }
+            }   
         } else {
             if (atkInputEnabled) {
                 atkInputEnabled = false;
@@ -376,15 +376,12 @@ public class PlayerController : BaseCharactarController {
                 atkInputNow = true;
             }
         }
-
     }
 
     public void ActionDamage(float damage) {
         if (!activeSts) {
             return;
         }
-
-        Debug.Log("맞음");
 
         animator.SetTrigger("DMG_A");
         speedVx = 0;
