@@ -50,8 +50,6 @@ public class FireBullet : MonoBehaviour
             return;
         }
 
-
-
         targetObject = PlayerController.GetGameObject();
         posTarget = targetObject.transform.position + new Vector3(0.0f, 0.1f, 0.0f);
 
