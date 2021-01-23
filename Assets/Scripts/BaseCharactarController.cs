@@ -2,8 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BaseCharactarController : MonoBehaviour
-{
+public class BaseCharactarController : MonoBehaviour {
     public Vector2 velocityMin = new Vector2(-100.0f, -100.0f);
     public Vector2 velocityMax = new Vector2(100.0f, 50.0f);
 
@@ -70,13 +69,11 @@ public class BaseCharactarController : MonoBehaviour
 
     }
 
-    protected virtual void Update()
-    {
+    protected virtual void Update() {
 
     }
 
-    protected virtual void FixedUpdate()
-    {
+    protected virtual void FixedUpdate() {
         //떨어지면 죽
         if (transform.position.y < -30.0f) {
             Dead(false);
@@ -98,13 +95,15 @@ public class BaseCharactarController : MonoBehaviour
         foreach (Collider2D[] groundCheckList in groundCheckCollider) {
             foreach (Collider2D groundCheck in groundCheckList) {
                 if (groundCheck != null) {
-                    grounded = true;
-                    if (groundCheck.tag == "Road") {
-                        groundCheck_OnRoadObject = groundCheck.gameObject;
-                    } else if (groundCheck.tag == "MoveObject") {
-                        groundCheck_OnMoveObject = groundCheck.gameObject;
-                    } else if (groundCheck.tag == "EnemyObject") {
-                        groundCheck_OnEnemyObject = groundCheck.gameObject;
+                    if (!groundCheck.isTrigger) {
+                        grounded = true;
+                        if (groundCheck.tag == "Road") {
+                            groundCheck_OnRoadObject = groundCheck.gameObject;
+                        } else if (groundCheck.tag == "MoveObject") {
+                            groundCheck_OnMoveObject = groundCheck.gameObject;
+                        } else if (groundCheck.tag == "EnemyObject") {
+                            groundCheck_OnEnemyObject = groundCheck.gameObject;
+                        }
                     }
                 }
             }
@@ -112,30 +111,26 @@ public class BaseCharactarController : MonoBehaviour
 
         FixedUpdateCharacter();
 
-        
+
         if (grounded) {
             speedVxAddPower = 0.0f;
-       
-            if (groundCheck_OnMoveObject != null) { 
+
+            if (groundCheck_OnMoveObject != null) {
                 speedVxAddPower = groundCheck_OnMoveObject.GetComponentInParent<Rigidbody2D>().velocity.x;
             }
         }
 
         // 강제로 0.5초간 x축으로 힘주기
-        if (addForceVxEnabled)
-        {
-            if (Time.fixedTime - addForceVxStartTime > 0.5f)
-            {
+        if (addForceVxEnabled) {
+            if (Time.fixedTime - addForceVxStartTime > 0.5f) {
                 addForceVxEnabled = false;
             }
-        }
-        else {
+        } else {
             GetComponent<Rigidbody2D>().velocity = new Vector2(speedVx + speedVxAddPower, GetComponent<Rigidbody2D>().velocity.y);
         }
 
         //가속도 더하기
-        if (addVelocityEnabled)
-        {
+        if (addVelocityEnabled) {
             addVelocityEnabled = false;
 
             GetComponent<Rigidbody2D>().velocity =
@@ -150,7 +145,7 @@ public class BaseCharactarController : MonoBehaviour
 
         //y축 속도 강제지정
         if (setVelocityVyEnabled) {
-            setVelocityVxEnabled = false;
+            setVelocityVyEnabled = false;
             GetComponent<Rigidbody2D>().velocity = new Vector2(GetComponent<Rigidbody2D>().velocity.x, setVelocityVy);
         }
 
@@ -165,65 +160,54 @@ public class BaseCharactarController : MonoBehaviour
 
     }
 
-    public virtual void AddForceAnimatorVx(float vx)
-    {
-        if (vx != 0.0f)
-        {
+    public virtual void AddForceAnimatorVx(float vx) {
+        if (vx != 0.0f) {
             GetComponent<Rigidbody2D>().AddForce(new Vector2(vx * dir, 0.0f));
             addForceVxEnabled = true;
             addForceVxStartTime = Time.fixedTime;
         }
     }
 
-    public virtual void AddForceAnimatorVy(float vy)
-    {
-        if (vy != 0.0f)
-        {
+    public virtual void AddForceAnimatorVy(float vy) {
+        if (vy != 0.0f) {
             GetComponent<Rigidbody2D>().AddForce(new Vector2(0.0f, vy));
             jumped = true;
             jumpStartTime = Time.fixedTime;
         }
     }
 
-    public virtual void AddVelocityVx(float vx)
-    {
+    public virtual void AddVelocityVx(float vx) {
         addVelocityEnabled = true;
         addVelocityVx = vx * dir;
     }
 
-    public virtual void AddVelocityVy(float vy)
-    {
+    public virtual void AddVelocityVy(float vy) {
         addVelocityEnabled = true;
         addVelocityVy = vy;
     }
 
-    public virtual void SetVelocityVx(float vx)
-    {
+    public virtual void SetVelocityVx(float vx) {
         setVelocityVxEnabled = true;
         setVelocityVx = vx * dir;
     }
 
-    public virtual void SetVelocityVy(float vy)
-    {
+    public virtual void SetVelocityVy(float vy) {
         setVelocityVyEnabled = true;
         setVelocityVy = vy;
     }
 
-    public virtual void SetLightGravity()
-    {
+    public virtual void SetLightGravity() {
         GetComponent<Rigidbody2D>().velocity = new Vector2(0.0f, 0.0f);
         GetComponent<Rigidbody2D>().gravityScale = 0.1f;
     }
 
     // 움직이기 
     public virtual void ActionMove(float n) {
-        if (n != 0.0f)
-        {
+        if (n != 0.0f) {
             dir = Mathf.Sign(n);
             speedVx = speed * n;
             animator.SetTrigger("Run");
-        }
-        else {
+        } else {
             speedVx = 0;
             animator.SetTrigger("Idle");
         }
@@ -274,8 +258,7 @@ public class BaseCharactarController : MonoBehaviour
 
     public bool ActionMoveToNear(GameObject go, float near) {
         //near 보다 거리가 멀면 다가간다
-        if (Vector3.Distance(transform.position, go.transform.position) > near)
-        {
+        if (Vector3.Distance(transform.position, go.transform.position) > near) {
             ActionMove((transform.position.x < go.transform.position.x) ? 1.0f : -1.0f);
             return true;
         }
@@ -283,11 +266,9 @@ public class BaseCharactarController : MonoBehaviour
         return false;
     }
 
-    public bool ActionMoveToFar(GameObject go, float far)
-    {
+    public bool ActionMoveToFar(GameObject go, float far) {
         // far 보다 거리가 가까우면 도망간다
-        if (Vector3.Distance(transform.position, go.transform.position) < far)
-        {
+        if (Vector3.Distance(transform.position, go.transform.position) < far) {
             ActionMove((transform.position.x > go.transform.position.x) ? 1.0f : -1.0f);
             return true;
         }

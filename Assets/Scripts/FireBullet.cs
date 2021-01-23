@@ -2,15 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum FIREBULLET
-{
+public enum FIREBULLET {
     ANGLE,
     HOMING,
     HOMING_Z
 }
 
-public class FireBullet : MonoBehaviour
-{
+public class FireBullet : MonoBehaviour {
     public FIREBULLET fireType = FIREBULLET.HOMING;
 
     public float attackDamage = 1;
@@ -27,7 +25,7 @@ public class FireBullet : MonoBehaviour
     public float homingAngleV = 180.0f;                         // 떠오르는 속도
     public float homingAngleA = 20.0f;                          // 떠오르는 가속도
 
-    public Vector3 bulletScaleV = Vector3.zero;                 
+    public Vector3 bulletScaleV = Vector3.zero;
     public Vector3 bulletScaleA = Vector3.zero;
 
     public Sprite hitSprite;
@@ -44,8 +42,7 @@ public class FireBullet : MonoBehaviour
     Quaternion homingRotate;
     float speed;
 
-    void Start()
-    {
+    void Start() {
         if (!owner) {
             return;
         }
@@ -65,7 +62,6 @@ public class FireBullet : MonoBehaviour
             case FIREBULLET.HOMING_Z:
                 speed = speedV;
                 break;
-
         }
 
         fireTime = Time.fixedTime;
@@ -75,22 +71,21 @@ public class FireBullet : MonoBehaviour
         Destroy(this.gameObject, lifeTime);
     }
 
-    void OnTriggerEnter2D(Collider2D other)
-    {
+    void OnTriggerEnter2D(Collider2D other) {
         if (!owner) {
             return;
         }
 
         /* 추가 other.tag?? */
-        if (other.isTrigger || 
+        if (other.isTrigger ||
             (owner.tag == "Player" && other.tag == "PlayerBody") ||
             (owner.tag == "Player" && other.tag == "PlayerArm") ||
             (owner.tag == "Player" && other.tag == "PlayerArmBullet") ||
             (owner.tag == "Enemy" && other.tag == "EnemyBody") ||
             (owner.tag == "Enemy" && other.tag == "EnemyArm") ||
             (owner.tag == "Enemy" && other.tag == "EnemyArmBullet")) {
-                return;
-            }
+            return;
+        }
 
         if (!penetration) {
             GetComponent<SpriteRenderer>().sprite = hitSprite;
@@ -100,33 +95,26 @@ public class FireBullet : MonoBehaviour
         }
     }
 
-    void Update()
-    {
+    void Update() {
         // 스프라이트 회전 처리
         transform.Rotate(0.0f, 0.0f, Time.deltaTime * rotateVt);
     }
 
-    void FixedUpdate()
-    {
+    void FixedUpdate() {
         bool homing = (Time.fixedTime - fireTime) > homingTime;
 
         // 날아가는 동안 타깃 좌표 수정
         if (homing) {
-            //if (targetObject == null) {
-            //    Debug.Log("targetObject is null");
-            //}
-
-//            posTarget = targetObject.transform.position + new Vector3(0.0f, 1.0f, 0.0f);
+            posTarget = targetObject.transform.position + new Vector3(0.0f, 1.0f, 0.0f);
         }
 
         switch (fireType) {
             case FIREBULLET.ANGLE:              // 지정한 각도로 발사
                 GetComponent<Rigidbody2D>().velocity = Quaternion.Euler(0.0f, 0.0f, angle)
-                    * new Vector3(speed, 0.0f,0.0f);
+                    * new Vector3(speed, 0.0f, 0.0f);
                 break;
 
-          
-            case FIREBULLET.HOMING:             // 가만히 있을 것 같다? 
+            case FIREBULLET.HOMING:      
                 if (homing) {
                     homingRotate = Quaternion.LookRotation(posTarget - transform.position);
                 }
@@ -136,7 +124,7 @@ public class FireBullet : MonoBehaviour
 
                 break;
 
-            case FIREBULLET.HOMING_Z:   //오히려 더 멀어질 것 같다 
+            case FIREBULLET.HOMING_Z:
                 if (homing) {
                     float targetAngle = Mathf.Atan2(
                         posTarget.y - transform.position.y,
@@ -151,7 +139,6 @@ public class FireBullet : MonoBehaviour
 
                     //호밍 가속도 연산
                     homingAngleV += (homingAngleA * Time.fixedDeltaTime);
-
 
                     homingRotate = Quaternion.Euler(0.0f, 0.0f, homingAngle);
                 }

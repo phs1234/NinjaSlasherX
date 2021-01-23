@@ -323,11 +323,11 @@ public class PlayerController : BaseCharactarController {
                         jumpCount++;
                     }
                     break;
-                // 2단 점프
+                // 2단 점프 
                 case 1:
                     if (!grounded) {
                         animator.Play("Player_Jump", 0, 0.0f);
-                        GetComponent<Rigidbody2D>().velocity = new Vector2(GetComponent<Rigidbody2D>().velocity.x, 20.0f);
+                        GetComponent<Rigidbody2D>().velocity = new Vector2(GetComponent<Rigidbody2D>().velocity.x, 40.0f);
                         jumped = true;
                         jumpCount++;
                     }
@@ -338,7 +338,6 @@ public class PlayerController : BaseCharactarController {
 
     public void ActionAttack() {
         AnimatorStateInfo stateInfo = animator.GetCurrentAnimatorStateInfo(0);
-
 
         if (stateInfo.nameHash == ANISTS_Idle ||
             stateInfo.nameHash == ANISTS_Walk ||
@@ -440,7 +439,7 @@ public class PlayerController : BaseCharactarController {
             AppSound.instance.BGM_HISCORE.Play();
         }
         
-        Application.LoadLevel(Application.loadedLevelName);
+        Application.LoadLevel("Menu_HiScore");
     }
 
     void GameReset() {

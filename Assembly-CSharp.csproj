@@ -79,8 +79,10 @@
     <Compile Include="Assets\Scripts\EnemyMain_D_Boss.cs" />
     <Compile Include="Assets\Scripts\EnemySprite.cs" />
     <Compile Include="Assets\Scripts\FireBullet.cs" />
+    <Compile Include="Assets\Scripts\Menu\Menu_HiScore.cs" />
     <Compile Include="Assets\Scripts\Menu\Menu_Logo.cs" />
     <Compile Include="Assets\Scripts\Menu\Menu_Option.cs" />
+    <Compile Include="Assets\Scripts\Menu\Menu_Pause.cs" />
     <Compile Include="Assets\Scripts\Menu\Menu_Title.cs" />
     <Compile Include="Assets\Scripts\Menu\MenuObject_Button.cs" />
     <Compile Include="Assets\Scripts\Menu\MenuObject_Slidebar.cs" />
@@ -106,11 +108,13 @@
     <Compile Include="Assets\Scripts\StageTrigger_EventObject.cs" />
     <Compile Include="Assets\Scripts\StageTrigger_EventSound.cs" />
     <Compile Include="Assets\Scripts\StageTrigger_Link.cs" />
+    <Compile Include="Assets\Scripts\test.cs" />
     <Compile Include="Assets\Scripts\Unity2DSortingLayer.cs" />
     <Compile Include="Assets\Scripts\zFoxDataPackString.cs" />
     <Compile Include="Assets\Scripts\zFoxDontDestroyOnLoad.cs" />
     <Compile Include="Assets\Scripts\zFoxFadeFilter.cs" />
     <Compile Include="Assets\Scripts\zFoxGameObjectLoader.cs" />
+    <Compile Include="Assets\Scripts\zFoxScreenAdjust.cs" />
     <Compile Include="Assets\Scripts\zFoxSoundManager.cs" />
     <Compile Include="Assets\Scripts\zFoxTween.cs" />
     <Compile Include="Assets\Scripts\zFoxUID.cs" />

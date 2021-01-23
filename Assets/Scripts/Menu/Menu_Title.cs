@@ -6,6 +6,8 @@ public class Menu_Title : MonoBehaviour {
     string jumpSceneName;
 
     void Start() {
+        System.GC.Collect();
+
         if (!SaveData.CheckGamePlayData()) {
             GameObject.Find("MenuButton_Continue").SetActive(false);
         } else {

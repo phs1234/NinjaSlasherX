@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4683932894631036768}
   - component: {fileID: 4683932894631036771}
-  - component: {fileID: 4683932894631036770}
+  - component: {fileID: 8697108507859223739}
   m_Layer: 9
   m_Name: StageB_RoadUnder_L
   m_TagString: Road
@@ -80,7 +80,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!61 &4683932894631036770
+--- !u!61 &8697108507859223739
 BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

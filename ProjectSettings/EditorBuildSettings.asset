@@ -6,6 +6,18 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/Scenes/Menu/Menu_Logo.unity
+    guid: 7d4c7ffef676ba1488794bb66c50be47
+  - enabled: 1
+    path: Assets/Scenes/Menu/Menu_Title.unity
+    guid: f4ebe2e4e202bbd48b96bec3e99a756a
+  - enabled: 1
+    path: Assets/Scenes/Menu/Menu_Option.unity
+    guid: f15e2dcd06995d5479690bb4840dc602
+  - enabled: 1
+    path: Assets/Scenes/Menu/Menu_HiScore.unity
+    guid: 39449486e6bc8484294bb7a868cb083d
+  - enabled: 1
     path: Assets/Scenes/StageA.unity
     guid: e736bf630857d479cac49d825e468d63
   - enabled: 1
@@ -74,10 +86,4 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/StageB_Boss.unity
     guid: c20be575468ecc0469fb7f264eb4aba6
-  - enabled: 1
-    path: Assets/Scenes/Menu/Menu_Logo.unity
-    guid: 7d4c7ffef676ba1488794bb66c50be47
-  - enabled: 1
-    path: Assets/Scenes/Menu/Menu_Title.unity
-    guid: f4ebe2e4e202bbd48b96bec3e99a756a
   m_configObjects: {}

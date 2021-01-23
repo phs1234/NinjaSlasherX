@@ -131,11 +131,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f617c75eef1b24ddeae5eabd1f9a55df, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fireType: 1
+  fireType: 2
   attackDamage: 1
   attackNockBackVector: {x: 0, y: 0}
   penetration: 0
-  lifeTime: 5
+  lifeTime: 3
   speedV: 10
   speedA: 0
   angle: 0
